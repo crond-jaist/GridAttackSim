@@ -1,0 +1,368 @@
+{
+  "type": "attack_library",
+  "version": "1.0",
+  "created": "2020-01-01",
+  "object": [
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "1",
+      "category_name": "Nefarious Activity",
+      "name": "Channel Jamming - Cluster",
+      "description": "Nefarious Activity",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "channel_jamming_cluster",
+          "description": "Since smart grid uses IP protocol and TCP/IP stack, it becomes subject to DoS attacks and to the vulnerabilities inherent in the TCP/IP stack. DoS attacks might attempt to delay, block, or corrupt information transmission in order to make smart grid resources unavailable",
+          "affected_value": [
+            {
+              "delay_cluster": 100,
+              "data_rate_cluster": 1000000
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "Network",
+          "description": "Network component is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "file": "schedule_1",
+          "start_time": "12:00:00",
+          "end_time": "18:00:00"
+        }
+      ]
+    },
+
+
+
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "2",
+      "category_name": "Nefarious Activity",
+      "name": "Channel Jamming - Peer-to-Peer",
+      "description": "Channel Jamming - Peer-to-Peer",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "channel_jamming_peer-to-peer",
+          "description": "Since smart grid uses IP protocol and TCP/IP stack, it becomes subject to DoS attacks and to the vulnerabilities inherent in the TCP/IP stack. DoS attacks might attempt to delay, block, or corrupt information transmission in order to make smart grid resources unavailable",
+          "affected_value": [
+            {
+              "data_rate_peer_to_peer": 1000000,
+              "delay_peer_to_peer": 100
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "Network",
+          "description": "Network component is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "3",
+      "category_name": "Nefarious Activity",
+      "name": "DNS attacks - Cluster",
+      "description": "DNS attacks - Cluster",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "dns_attacks_peer-to-peer",
+          "description": "Acknowledges forgery is a threat where an attacker knows the DNS value and can send a false acknowledgement messages to the sender saying that the receiver has received the message when, in fact, it hasn't. A routing-based DoS attack is based on the idea that the attacker manipulates the routing table enabling the attacker to route the traffic of a victim to the attacker's system or to a black hole which is a network that does not exist and thus denying the victim to access the requested service. On the other hand, in a DNS-based DoS attack, an attacker compromises a DNS server to cache bogus DNS information so that traffic towards the target system is routed to the attacker's system and thereby denying other users to access services offered by the target system",
+          "affected_value": [
+            {
+              "data_rate_cluster": 5000000,
+              "delay_cluster": 50
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "Network",
+          "description": "Network component is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "4",
+      "category_name": "Nefarious Activity",
+      "name": "DNS attacks - Peer-to-Peer",
+      "description": "DNS attacks - Peer-to-Peer",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "dns_attacks_peer_to_peer",
+          "description": "Acknowledges forgery is a threat where an attacker knows the DNS value and can send a false acknowledgement messages to the sender saying that the receiver has received the message when, in fact, it hasn't. A routing-based DoS attack is based on the idea that the attacker manipulates the routing table enabling the attacker to route the traffic of a victim to the attacker's system or to a black hole which is a network that does not exist and thus denying the victim to access the requested service. On the other hand, in a DNS-based DoS attack, an attacker compromises a DNS server to cache bogus DNS information so that traffic towards the target system is routed to the attacker's system and thereby denying other users to access services offered by the target system",
+          "affected_value": [
+            {
+              "data_rate_peer_to_peer": 1000000,
+              "delay_peer_to_peer": 10
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "Network",
+          "description": "Network component is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "5",
+      "category_name": "Nefarious Activity",
+      "name": "Injection Attacks - Control Systems",
+      "description": "Injection Attacks - Control Systems - Control systems (The Auction System) ",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "injection_attacks_control_systems",
+          "description": "An attacker can send packets to inject false information in the network, such as wrong meter data, false prices, fake emergency event, etc. Fake information can have huge financial impact on the electricity markets.",
+          "affected_value": [
+            {
+              "max_capacity_reference_bid_quantity": 100
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "Control Systems",
+          "description": "Control systems (The Auction System) is affected",
+          "file": "GridLab-D.glm"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "6",
+      "category_name": "Nefarious Activity",
+      "name": "Injection Attacks - End-point Systems",
+      "description": "Injection Attacks - End-point Systems",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "injection_attacks_end_point",
+          "description": "An attacker can send packets to inject false information in the network, such as wrong meter data, false prices, fake emergency event, etc. Fake information can have huge financial impact on the electricity markets.",
+          "affected_value": [
+            {
+              "comfort_level": 0.1
+
+
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "End-point Systems",
+          "description": "End-point System is affected",
+          "file": "GridLab-D.glm"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+
+    {
+      "attack_category": "nefarious_activity",
+      "attack_id": "7",
+      "category_name": "Nefarious Activity",
+      "name": "Malicious Code - End-point Systems",
+      "description": "Malicious Code - End-point Systems",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "malicious_code_end_point",
+          "description": "An attacker can develop malware and spread it to infect smart meters or company servers. Malware can be used to replace or add any function to a device or a system such as sending sensitive information.",
+          "affected_value": [
+            {
+              "proxy_clear_price": 7.8,
+              "proxy_price_cap": 5.9
+
+
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "End-point Systems",
+          "description": "End-point System is affected",
+          "file": "GridLab-D.glm"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+
+
+
+    {
+      "attack_category": "eavesdropping_interception_hijacking",
+      "attack_id": "8",
+      "category_name": "Eavesdropping, Interception and Hijacking",
+      "name": "Replay of Messages - Cluster",
+      "description": "Replay of Messages - Cluster",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "replay_of_messages_cluster",
+          "description": "Acknowledges forgery is a threat where an attacker knows the DNS value and can send a false acknowledgement messages to the sender saying that the receiver has received the message when, in fact, it hasn't",
+          "affected_value": [
+            {
+              "data_rate_cluster": 2000000,
+              "delay_cluster": 50
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "End-point Systems",
+          "description": "End-point System is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    },
+
+
+
+
+    {
+      "attack_category": "eavesdropping_interception_hijacking",
+      "attack_id": "9",
+      "category_name": "Eavesdropping, Interception and Hijacking",
+      "name": "Replay of Messages - Peer-to-Peer",
+      "description": "Replay of Messages - Peer-to-Peer",
+      "attack_type": [
+        {
+          "type_id": "1",
+          "type_name": "replay_of_messages_peer_to_peer",
+          "description": "Acknowledges forgery is a threat where an attacker knows the DNS value and can send a false acknowledgement messages to the sender saying that the receiver has received the message when, in fact, it hasn't",
+          "affected_value": [
+            {
+              "data_rate_peer_to_peer": 3000000,
+              "delay_peer_to_peer": 70
+            }
+          ]
+        }
+      ],
+      "attack_component": [
+        {
+          "component_id": "1",
+          "component_name": "End-point Systems",
+          "description": "End-point System is affected",
+          "file": "ns-3.cc"
+        }
+      ],
+      "attack_schedule": [
+        {
+          "schedule_id": "1",
+          "description": "This is a description",
+          "start_time": "start_time",
+          "end_time": "end_time"
+        }
+      ]
+    }
+
+
+
+
+
+
+  ]
+}
