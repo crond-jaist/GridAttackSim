@@ -59,9 +59,9 @@ three external components, FNCS, ns-3, and GridLAB-D. For details,
 please consult our [Installation Guide](/installation_guide.md).
 
 Once the external components are installed, use the
-[releases](https://github.com/crond-jaist/GridAttackSim/releases) page
-to download the latest version of GridAttackSim, and extract the
-source code archive into a directory of your choice.
+[releases](/releases) page to download the latest version of
+GridAttackSim, and extract the source code archive into a directory of
+your choice.
 
 
 ## Quick Start
