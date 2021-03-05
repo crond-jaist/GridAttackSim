@@ -1,0 +1,296 @@
+
+clock {
+	 timezone EST+5EDT;
+     starttime '2009-07-21 00:00:00';
+     stoptime '2009-07-22 00:00:00';
+}
+#include "light_schedule.glm";
+module powerflow {
+     solver_method FBS;
+     NR_iteration_limit 50;
+};
+module market;
+module tape;
+module residential {
+     implicit_enduses NONE;
+};
+module climate;
+module connection;
+
+class auction {
+    double current_price_mean_24h;
+    double current_price_stdev_24h;
+}
+
+object auction {
+    name Market_1;
+    special_mode NONE;
+    unit kW;
+    price_cap 3.78;
+    period 300;
+    init_price 0.10;
+    init_stdev 0.05;
+		capacity_reference_object transformer23;
+		capacity_reference_property power_out_real;
+	object player {
+		property capacity_reference_bid_price;
+		file ExamplePrices2.player;
+		loop 150;
+	};
+    max_capacity_reference_bid_quantity 150;
+    warmup 0;
+object recorder {
+         property capacity_reference_bid_price, current_market.clearing_price, current_market.clearing_quantity;
+         limit 100000000;
+         interval 60;
+         file baseprice_clearedprice_clearedquantity.csv;
+    };
+}
+
+
+
+
+object csv_reader {
+     name CSVREADER;
+     filename "ColumbusWeather2009_2a.csv";
+}
+
+object climate {
+     name "Minneapolis MN";
+     tmyfile "ColumbusWeather2009_2a.csv";
+     reader CSVREADER;
+};
+
+object fncs_msg {
+     name fncs_msg;
+ 	 	 parent Market_1;
+     route "function:controller/submit_bid_state -> auction/submit_bid_state";
+     option "transport:hostname localhost, port 5570";
+     configure fncs_msg.txt;
+}
+
+
+
+object overhead_line_conductor {
+	name overhead_line_conductor100;
+	geometric_mean_radius 0.0244;
+	resistance 0.306;
+}
+
+object overhead_line_conductor {
+	name overhead_line_conductor101;
+	geometric_mean_radius 0.00814;
+	resistance 0.592;
+}
+
+object line_spacing {
+	name line_spacing200;
+	distance_AB 2.5;
+	distance_BC 4.5;
+	distance_AC 7.0;
+	distance_AN 5.656854;
+	distance_BN 4.272002;
+	distance_CN 5.0;
+}
+
+object line_configuration {
+	name line_configuration300;
+	conductor_A overhead_line_conductor100;
+	conductor_B overhead_line_conductor100;
+	conductor_C overhead_line_conductor100;
+	conductor_N overhead_line_conductor101;
+	spacing line_spacing200;
+}
+
+object transformer_configuration {
+	name transformer_configuration400;
+	connect_type 1;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 12470;
+	secondary_voltage 4160;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+object node {
+	name node1;
+	bustype SWING;
+	phases "ABCN";
+	voltage_A +7199.558+0.000j;
+	voltage_B -3599.779-6235.000j;
+	voltage_C -3599.779+6235.000j;
+	nominal_voltage 7200;
+}
+
+object overhead_line {
+	phases "ABCN";
+	from node1;
+	to node2;
+	length 2000;
+	configuration line_configuration300;
+}
+
+object node {
+	name node2;
+	phases "ABCN";
+	voltage_A +7199.558+0.000j;
+	voltage_B -3599.779-6235.000j;
+	voltage_C -3599.779+6235.000j;
+	nominal_voltage 7200;
+}
+
+object transformer {
+	name transformer23;
+	phases "ABCN";
+	from node2;
+	to node3;
+	configuration transformer_configuration400;
+	object recorder {
+			 interval 60;
+			 limit 0;
+			 property power_out_real;
+			 file totalload.csv;
+	};
+}
+
+object node {
+	name node3;
+	phases "ABCN";
+	voltage_A +2401.777+0.000j;
+	voltage_B -1200.889-2080.000j;
+	voltage_C -1200.889+2080.000j;
+	nominal_voltage 2400;
+}
+
+object overhead_line:34 {
+	phases "ABCN";
+	from node3;
+	to node4;
+	length 2500;
+	configuration line_configuration300;
+}
+
+object node {
+	name node4;
+	phases ABCN;
+	nominal_voltage 2400;
+}
+
+object transformer {
+       name CTTF_A1;
+       phases AS;
+       from node4;
+       to tn_A1;
+       configuration object transformer_configuration {
+            connect_type SINGLE_PHASE_CENTER_TAPPED;
+            install_type POLETOP;
+            shunt_impedance 10000+10000j;
+            primary_voltage 2401.777;
+            secondary_voltage 120;
+            powerA_rating 25 kVA;
+            impedance 0.00033+0.0022j;
+       };
+       groupid Distribution_Trans;
+}
+
+object triplex_meter {
+       name tn_A1;
+       phases AS;
+       nominal_voltage 120;
+}
+
+object triplex_line_configuration {
+      name trip_line_config;
+      conductor_1 object triplex_line_conductor {
+            resistance 0.97;
+            geometric_mean_radius 0.01111;
+            };
+      conductor_2 object triplex_line_conductor {
+            resistance 0.97;
+            geometric_mean_radius 0.01111;
+            };
+      conductor_N object triplex_line_conductor {
+            resistance 0.97;
+            geometric_mean_radius 0.01111;
+            };
+      insulation_thickness 0.08;
+      diameter 0.368;
+}
+
+object triplex_line {
+       name tl_A1;
+       phases AS;
+       from tn_A1;
+       to tm_A1;
+       length 19.10;
+       configuration trip_line_config;
+       groupid Triplex_Line;
+}
+
+object triplex_meter {
+       name tm_A1;
+       phases AS;
+       nominal_voltage 120;
+}
+
+
+object house {
+     parent tm_A1;
+     name house_A1;
+     floor_area 1936;
+     schedule_skew 2754;
+     heating_system_type HEAT_PUMP;
+     heating_COP 2.7;
+     cooling_system_type ELECTRIC;
+     object controller {
+			 		 name HOUSE_1;
+           schedule_skew 2754;
+           market Market_1;
+           bid_mode ON;
+
+
+	   proxy_average 0.042676;
+           proxy_standard_deviation 0.020000;
+           proxy_market_id 1;
+           proxy_clear_price 0.042676;
+           proxy_price_cap 3.78;
+
+
+           control_mode DOUBLE_RAMP;
+           resolve_mode DEADBAND;
+           slider_setting_heat 0.500;
+           slider_setting_cool 0.500;
+           heating_base_setpoint 68;
+           cooling_base_setpoint 74;
+           period 300;
+           average_target current_price_mean_24h;
+           standard_deviation_target current_price_stdev_24h;
+           target air_temperature;
+           heating_setpoint heating_setpoint;
+           heating_demand last_heating_load;
+           cooling_setpoint cooling_setpoint;
+           cooling_demand last_cooling_load;
+           deadband thermostat_deadband;
+           total hvac_load;
+           load hvac_load;
+           state power_state;
+       };
+     thermal_integrity_level 5;
+     air_temperature 70;
+     mass_temperature 70;
+     cooling_COP 2.7;
+object ZIPload {
+           base_power LIGHTS*1.33;
+           schedule_skew -1582;
+           heatgain_fraction 0.9;
+           power_pf 1.000;
+           current_pf 1.000;
+           impedance_pf 1.000;
+           impedance_fraction 0.300000;
+           current_fraction 0.300000;
+           power_fraction 0.400000;
+     };
+}

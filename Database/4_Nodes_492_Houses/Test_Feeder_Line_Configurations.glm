@@ -1,0 +1,90 @@
+//Configuration file for 4-node system with houses
+
+object overhead_line_conductor {
+	name olc100;
+	geometric_mean_radius 0.0244;
+	resistance 0.306;
+}
+
+object overhead_line_conductor {
+	name olc101;
+	geometric_mean_radius 0.00814;
+	resistance 0.592;
+}
+
+object line_spacing {
+	name ls200;
+	distance_AB 2.5;
+	distance_BC 4.5;
+	distance_AC 7.0;
+	distance_AN 5.656854;
+	distance_BN 4.272002;
+	distance_CN 5.0;
+}
+
+object line_configuration {
+	name lc300;
+	conductor_A olc100;
+	conductor_B olc100;
+	conductor_C olc100;
+	conductor_N olc101;
+	spacing ls200;
+}
+
+object transformer_configuration {
+	name tc400;
+	connect_type WYE_WYE;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 7200;
+	secondary_voltage 2400;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+object transformer_configuration {                                                                                            
+	name AS_config;                                                                                                             
+	connect_type SINGLE_PHASE_CENTER_TAPPED;                                                                                    
+	install_type POLETOP;                                                                                                       
+	powerA_rating 75;                                                                                                           
+	primary_voltage 2401;                                                                                                       
+	secondary_voltage 124.000;                                                                                                  
+	impedance 0.006+0.0136j;                                                                                                    
+}                                                                                                                             
+
+object transformer_configuration {                                                                                            
+	name BS_config;                                                                                                             
+	connect_type SINGLE_PHASE_CENTER_TAPPED;                                                                                    
+	install_type POLETOP;                                                                                                       
+	powerB_rating 75;                                                                                                           
+	primary_voltage 2401;                                                                                                       
+	secondary_voltage 124.000;                                                                                                  
+	impedance 0.006+0.0136j;                                                                                                    
+}                                                                                                                             
+
+object transformer_configuration {                                                                                            
+	name CS_config;                                                                                                             
+	connect_type SINGLE_PHASE_CENTER_TAPPED;                                                                                    
+	install_type POLETOP;                                                                                                       
+	powerC_rating 75;                                                                                                           
+	primary_voltage 2401;                                                                                                       
+	secondary_voltage 124.000;                                                                                                  
+	impedance 0.006+0.0136j;                                                                                                    
+}                                                                                                                             
+
+object triplex_line_conductor {
+	name tplex_line_cond;
+	resistance 0.97;                                                                                                    
+	geometric_mean_radius 0.0111;                                                                                       
+}	
+
+object triplex_line_configuration {                                                                                           
+	name triplex_line_configuration_1;                                                                                       
+	conductor_1 tplex_line_cond;
+	conductor_2 tplex_line_cond;
+	conductor_N tplex_line_cond;
+	insulation_thickness 0.08;                                                                                               
+	diameter 0.368;                                                                                                          
+}  

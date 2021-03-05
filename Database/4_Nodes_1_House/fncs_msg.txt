@@ -1,0 +1,10 @@
+route "commit:Market_1.current_market.clearing_price -> HOUSE_1/clearPrice; 0";
+route "commit:Market_1.market_id -> HOUSE_1/mktID; 0";
+route "commit:Market_1.current_price_mean_24h -> HOUSE_1/avgPrice; 0";
+route "commit:Market_1.current_price_mean_24h -> HOUSE_1/avgPrice; 0";
+route "commit:Market_1.current_price_stdev_24h -> HOUSE_1/stdevPrice; 0";
+subscribe "function:auction/submit_bid_state <- ns3_1/fncs_msg/HOUSE_1@Market_1/submit_bid_state";
+subscribe "precommit:HOUSE_1.proxy_clear_price <- ns3_1/fncs_msg/Market_1@HOUSE_1/clearPrice";
+subscribe "precommit:HOUSE_1.proxy_market_id <- ns3_1/fncs_msg/Market_1@HOUSE_1/mktID";
+subscribe "precommit:HOUSE_1.proxy_average <- ns3_1/fncs_msg/Market_1@HOUSE_1/avgPrice";
+subscribe "precommit:HOUSE_1.proxy_standard_deviation <- ns3_1/fncs_msg/Market_1@HOUSE_1/stdevPrice";
