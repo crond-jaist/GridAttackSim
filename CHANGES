@@ -1,7 +1,7 @@
 
 GridAttackSim v1.0
 ------------------
-* First public release of the GridAttackSim, the smart grid attack
+* First public release of GridAttackSim, the smart grid attack
   co-simulation framework that makes it possible to simulate various
   cyber-attacks on the smart grid infrastructure and visualize their
   consequences. The framework is extensible by end users, and the
