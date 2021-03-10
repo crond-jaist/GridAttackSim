@@ -1,5 +1,5 @@
 
-# GridAttackSim: Smart Grid Attack Co-simulation Framework
+# GridAttackSim: Smart Grid Attack Simulation Framework
 
 GridAttackSim is a framework that makes it possible to simulate
 various cyber-attacks on the smart grid infrastructure and visualize
