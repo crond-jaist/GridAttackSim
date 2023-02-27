@@ -100,7 +100,12 @@ def main():
     p2 = subprocess.Popen('./run.sh', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable='/bin/bash')
     time.sleep(2)
     child = subprocess.Popen('pgrep xterm', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable='/bin/bash')
-    pid = int(child.communicate()[0].split('\n')[0])
+    x = child.communicate()[0]
+    x = int(x.title().decode('utf-8').split('\n')[0])
+    print(x, type(x))
+    #pid = int(child.communicate()[0].split('\n')[0])
+    pid = x
+    #pid = int(child.communicate()[0].split('\n')[0])
     print("The Simulation is running!")
     print("Process PID: "+str(pid))
     while is_running(pid):
